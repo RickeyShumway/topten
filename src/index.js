@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import { TopBar, MainContent, BottomBar, ListItem} from './App';
 import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+    <TopBar />
+    <MainContent />
+    <BottomBar />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
