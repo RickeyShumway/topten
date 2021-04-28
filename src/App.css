@@ -27,8 +27,35 @@ html, body {
 .right-bar {
   background-color: rgb(234, 233, 255);
   width: 90%;
+  display: flex;
+}
+.profile {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+.video-list {
+  width: 50%;
 }
 .social-button {
   border: 2px solid black;
   background-color: green;
+}
+.empty-list-item {
+  height: 50px;
+  border-bottom: 1px solid rgb(181, 181, 181);
+  display: flex;
+  
+}
+.list-num {
+  align-self: flex-start;
+}
+.empty {
+  font-size: larger;
+  align-self: center;
+  color: gray;
+  padding-left: 20px;
+  
 }
