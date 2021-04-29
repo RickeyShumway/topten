@@ -5,7 +5,8 @@ import Heading from './rightheading'
 export default function ListContent() {
     return (
         <div class='list-content'>
-
+            <Heading />
+            <VideoList />
         </div>
     )
 }

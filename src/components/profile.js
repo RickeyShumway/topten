@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-const emptyImage = <FontAwesomeIcon icon={faUserCircle} />
+const emptyImage = <FontAwesomeIcon size='100px' icon={faUserCircle} />
 export default function Profile() {
     return (
         <div className='profile'>

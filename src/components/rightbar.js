@@ -1,11 +1,10 @@
-
+import ListContent from './listcontent'
 import Profile from './profile'
 
 export default function RightBar() {
     return (
     <div class="right-bar">
-      <Heading />
-      <VideoList />
+      <ListContent />
       <Profile />
     </div>
     )
