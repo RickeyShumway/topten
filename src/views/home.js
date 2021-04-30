@@ -1,11 +1,16 @@
 import LeftBar from "../components/leftbar";
 import RightBar from "../components/rightbar";
+import {appData, Profile} from '../components/data';
 
-export default function HomePage() {
+// const profileList = appData.profiles;
+// console.log(profileList)
+export default function HomePage(props) {
+    let arr = props.profileList;
+    console.log('arr', arr)
     return (
-        <div class='main-content'>
+        <div className='main-content'>
             <LeftBar />
-            <RightBar />
+            <RightBar view="home" profiles={arr}/>
         </div>
     )
 }

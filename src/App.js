@@ -7,7 +7,17 @@ import LoginPage from './views/login.js'
 import Admin from './views/admin.js'
 import AddSocial from './views/addsocial.js'
 import RegList from './views/list.js'
+import LeftBar from './components/leftbar';
+import {appData, Profile} from './components/data'
 window.React = React;
+
+//appData.addPerson('rickey');
+appData.addPerson('rick')
+appData.addPerson('jon')
+appData.addPerson('kyle')
+appData.addPerson('john')
+appData.addPerson('ben')
+appData.addPerson('jan')
 
 function TopBar() {
   return (
@@ -16,9 +26,14 @@ function TopBar() {
       <div className="logo">
         <Link to='/'>Top Ten</Link>
       </div>
+      <span>
       <div className="login">
         <Link to="/login">Login</Link>
       </div>
+      <div className="profile-link">
+        <Link to="/admin">Profile</Link>
+      </div>
+      </span>
     </div>
   )
 }
@@ -27,16 +42,13 @@ function MainContent() {
     <div className="main">
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          <HomePage profileList={[...appData.profiles]}/>
         </Route>
         <Route path="/favorites/:id">
           <RegList />
         </Route>
         <Route path="/login">
           <LoginPage />
-        </Route>
-        <Route path="/addsocial">
-          <AddSocial />
         </Route>
         <Route path="/admin">
           <Admin />

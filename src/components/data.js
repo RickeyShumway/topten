@@ -21,10 +21,14 @@ export class Profile {
     }
     
 }
-const app = {
+export const appData = {
     name: 'Top Ten',
     medias: ['Youtube, Spotify, IMBD'],
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
+    addPerson: function(chee) {
+        let newPerson = new Profile(chee);
+        this.profiles.push(newPerson);
+    }
 
 }

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube, faSpotify, faImdb } from '@fortawesome/free-brands-svg-icons';
+import { Button, TextField } from '@material-ui/core';
 
 const youtubeIcon = <FontAwesomeIcon icon={faYoutube} />
 const spotifyIcon = <FontAwesomeIcon icon={faSpotify} />
@@ -24,8 +25,11 @@ function SocialList(props) {
 }
 function Social(props) {
     return(
-        <div className="social-button" onClick={props.click}>
+        <Button variant="contained" className="social-button" onClick={props.click}>
             {props.web}
-        </div>
+        </Button>
+        // <div className="social-button" onClick={props.click}>
+        //     {props.web}
+        // </div>
     )
 }
