@@ -37,8 +37,12 @@ export const appData = {
         let newPerson = new Profile(chee, id);
         this.profiles.push(newPerson);
         this.selectProfile(0);
+        this.adminProf(0);
+    },
+    adminProf: function(index) {
+        this.adminProfile = this.profiles[index];
     },
     selectProfile: function(index) {
         this.selectedProfile = this.profiles[index];
-    }
+    },
 }

@@ -39,6 +39,21 @@ export default function RightBar(props) {
     </div>
     )
   }
+  if(props.view == 'adminprofile') {
+    return (
+    <div className="right-bar">
+      <div className="right-left">
+        <Heading heading='Profile' />
+        <ListContent />
+      </div>
+      <div className="right-right">
+       
+        <Profile user={props.selected}/>
+        
+      </div>
+    </div>
+    )
+  }
 }
 function TextInput(props) {
   return(

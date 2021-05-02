@@ -5,6 +5,11 @@ html, body, #root {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .bar {
   box-sizing: border-box;
   width: 100%;
@@ -26,11 +31,9 @@ html, body, #root {
 }
 
 .main-content {
-  box-sizing: border-box;
   width: 100%;
   display: flex;
   height: 90vh;
-  box-sizing: border-box;
 }
 .main-content .left-bar {
   box-sizing: border-box;
@@ -40,7 +43,6 @@ html, body, #root {
   background-color: gray;
 }
 .main-content .right-bar {
-  box-sizing: border-box;
   width: 90%;
   display: flex;
   overflow-y: scroll;
@@ -48,6 +50,28 @@ html, body, #root {
 .main-content .right-bar .right-left {
   background-color: lightblue;
   width: 50%;
+  min-height: 90vh;
+  height: fit-content;
+  overflow-y: scroll;
+}
+.main-content .right-bar .right-left .profile-list {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.main-content .right-bar .right-left .profile-list .profile {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: purple;
+  width: 50%;
+  margin: 50px;
 }
 .main-content .right-bar .right-right {
   background-color: lightgreen;

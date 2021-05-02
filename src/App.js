@@ -51,7 +51,7 @@ function MainContent() {
           <LoginPage />
         </Route>
         <Route path="/admin">
-          <Admin />
+          <Admin selected={appData.adminProfile}/>
         </Route>
       </Switch>
     </>

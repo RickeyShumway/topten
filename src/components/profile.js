@@ -19,9 +19,11 @@ export function Profile(props) {
     console.log()
     return (
         <Link to='/pubprofile'>
+        <div className='profile-wrap'>
         <div className='profile' id={props.user.id} onClick={()=>console.log('youclickedme')}>
                 <div className='profile-pic'>{props.user.pic}</div>
                 <div className='profile-name'>{props.user.name}</div>
+            </div>
             </div>
             </Link>    
     )
