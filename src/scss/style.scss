@@ -1,0 +1,50 @@
+@import 'mixins';
+html, body, #root {
+    @include fill-flex;
+}
+.bar {
+   box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    height: 5vh;
+    font-size: 1.4em;
+    background-color: rgb(175, 104, 247);
+}
+.top-bar {
+    box-sizing: border-box;
+    .logo {
+        width: 50%;
+      }
+    .view-links {
+        display: flex;
+        width: 50%;
+    }
+}
+.main-content {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    height: 90vh;
+    box-sizing: border-box;
+    .left-bar {
+        box-sizing: border-box;
+        width: 10%;
+        min-width: 65px;
+        height: 100%;
+        background-color: gray;
+      }
+      .right-bar {
+        box-sizing: border-box;
+        width: 90%;
+        display: flex;
+        overflow-y: scroll;
+        .right-left {
+            background-color: lightblue;
+            width: 50%;
+        }
+        .right-right {
+            background-color: lightgreen;
+            width: 50%;
+        }
+      }
+  }

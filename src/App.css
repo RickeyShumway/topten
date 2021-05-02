@@ -1,36 +1,6 @@
-html, body {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
 
-#root {
-  min-height: 100%;
-  min-width: 100%;
-}
-.bar {
-  background-color:rgb(166, 23, 255);
-  display: flex;
-  justify-content: space-between;
-  height: 5vh;
-}
-.main-content {
-  display: flex;
-  height: 90vh;
-  
-}
-.left-bar {
-  width: 10%;
-  height: 100%;
-  background-color: gray;
-}
-.right-bar {
-  background-color: rgb(234, 233, 255);
-  width: 90%;
-  display: flex;
-  overflow-y: scroll;
-}
+
+
 .profile {
   width: 50%;
   display: flex;
@@ -51,8 +21,6 @@ html, body {
 .list-item {
 
   border-bottom: 1px solid rgb(181, 181, 181);
-  
-  
 }
 .num-title {
   display: flex;
@@ -61,17 +29,12 @@ html, body {
   align-self: flex-start;
 }
 .item-container {
- 
   align-self: center;
- 
   padding-left: 20px;
-  
 }
 .video {
-  
 }
 .fa-user-circle {
-  
 }
 .login-form {
   width: 100%;
@@ -84,4 +47,7 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+.profile-pic {
+  background-color: green;
 }

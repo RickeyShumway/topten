@@ -5,10 +5,10 @@ const youtubeIcon = <FontAwesomeIcon icon={faYoutube} />
 const spotifyIcon = <FontAwesomeIcon icon={faSpotify} />
 const imdbIcon = <FontAwesomeIcon icon={faImdb} />
 
-export default function Heading() {
+export default function Heading(props) {
     return (
         <div className="heading">
-            Youtube
+            {props.heading}
         </div>
     )
 }
