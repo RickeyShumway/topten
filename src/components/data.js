@@ -1,3 +1,4 @@
+import { createContext, useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube, faSpotify, faImdb } from '@fortawesome/free-brands-svg-icons';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -6,10 +7,14 @@ const youtubeIcon = <FontAwesomeIcon icon={faYoutube} />
 const spotifyIcon = <FontAwesomeIcon icon={faSpotify} />
 const imdbIcon = <FontAwesomeIcon icon={faImdb} />
 const emptyImage = <FontAwesomeIcon icon={faUserCircle} />
-
+const GlobalContext = createContext();
+export const useGlobalContext = () => {
+    return useContext(GlobalContext);
+}
 export class Profile {
-    constructor(name, id) {
+    constructor({name, email, id}) {
         this.name = name;
+        this.email = email;
         this.id = id;
         this.youtube = true;
         this.urls = [];
@@ -27,11 +32,11 @@ export class Profile {
 }
 export const appData = {
     name: 'Top Ten',
-    medias: ['Youtube, Spotify, IMBD'],
+    media: ['Youtube, Spotify, IMBD'],
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
     selectedProfile:null,
-    adminProfile:null,
+    userProfile:null,
     addPerson: function(chee) {
         let id = uuidv4();
         let newPerson = new Profile(chee, id);
@@ -45,4 +50,43 @@ export const appData = {
     selectProfile: function(index) {
         this.selectedProfile = this.profiles[index];
     },
+
+}
+export const GlobalProvider = (props) => {
+    const [state, setState] = useState(appData)
+    const addPerson = function(user) {
+        let newState={...state};
+        let id = uuidv4();
+        let newPerson = new Profile({...user, id});
+        newState.profiles.push(newPerson);
+        setState(newState);
+    }
+    useEffect(()=> {
+        addPerson({name:'jon', email:'uuuu@gmail.com'})
+    },
+    []
+    )
+
+    return (
+        <GlobalContext.Provider value={{
+            state,
+            addPerson,
+            userLogin: function(username, password) {
+                let newState={...state}
+
+                if(username && password) {
+                    
+                    const userProfile = state.profiles.find(profile=> profile.email === username)
+                    if(userProfile) {
+                        newState.userProfile = userProfile;
+                        console.log('newState',newState)
+                        setState(newState);
+                    } else {
+                        console.log('could not find username or password')
+                    }
+                } 
+
+            }
+        }}>{props.children}</GlobalContext.Provider>
+    )
 }

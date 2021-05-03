@@ -80,3 +80,18 @@ a {
         }
       }
   }
+  .login-form {
+      width: 100%;
+      
+      .form {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-items: center;
+      }
+      .outlined-basic {
+          margin-top: 10%;
+      }
+      
+}
+      

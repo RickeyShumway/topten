@@ -12,12 +12,7 @@ import {appData, Profile} from './components/data'
 window.React = React;
 
 //appData.addPerson('rickey');
-appData.addPerson('rick')
-appData.addPerson('jon')
-appData.addPerson('kyle')
-appData.addPerson('john')
-appData.addPerson('ben')
-appData.addPerson('jan')
+
 
 function TopBar() {
   return (

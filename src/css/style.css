@@ -78,4 +78,17 @@ a {
   width: 50%;
 }
 
+.login-form {
+  width: 100%;
+}
+.login-form .form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.login-form .outlined-basic {
+  margin-top: 10%;
+}
+
 /*# sourceMappingURL=style.css.map */
