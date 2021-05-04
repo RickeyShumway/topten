@@ -36,7 +36,7 @@ export default function RightBar(props) {
     <div className="right-bar">
       <div className="right-left">
         <Heading heading='Profile' />
-        <ListContent />
+        <ListContent user={props.selected}/>
       </div>
       <div className="right-right">
         <Profile user={props.selected}/>
@@ -49,10 +49,10 @@ export default function RightBar(props) {
     <div className="right-bar">
       <div className="right-left">
         <Heading heading='Profile' />
-        <ListContent />
+        <ListContent user={props.selected}/>
       </div>
       <div className="right-right">
-       
+       User Profile
         <Profile user={props.selected}/>
         
       </div>

@@ -17,9 +17,8 @@ export class Profile {
         this.email = email;
         this.id = id;
         this.youtube = true;
-        this.urls = [];
+        this.urls = ['https://www.youtube.com/watch?v=y1hWi-vgoaU','https://www.youtube.com/watch?v=1_qHb40iq64','https://www.youtube.com/watch?v=nZ67YBF3qRc'];
         this.pic = emptyImage;
-        
     }
     addUrl(url, index) {
         this.urls.splice(index, 1, url);
@@ -27,8 +26,6 @@ export class Profile {
     editName(newName) {
         this.name = newName;
     }
-    
-    
 }
 export const appData = {
     name: 'Top Ten',
@@ -36,7 +33,7 @@ export const appData = {
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
     selectedProfile:null,
-    userProfile:null,    
+    userProfile:null,
 }
 export const GlobalProvider = (props) => {
     const [state, setState] = useState(appData)
@@ -50,32 +47,35 @@ export const GlobalProvider = (props) => {
         console.log('userprofile',newState.userProfile,'selectedProfile', newState.selectedProfile)
         setState(newState);
     }
+    const userLogin = function(username, password) {
+        let newState={...state}
+        if(username && password) {
+            const userProfile = state.profiles.find(profile=> profile.email === username)
+            if(userProfile) {
+                newState.userProfile = userProfile;
+                console.log('newState',newState)
+                setState(newState);
+            } else {
+                console.log('could not find username or password')
+            }
+        }
+    };
+    const selectProfile = function(data) {
+        let newState={...state};
+        newState.selectedProfile = data;
+        setState(newState);
+    }
     useEffect(()=> {
         addPerson({name:'jon', email:'uuuu@gmail.com'})
     },
     []
     )
-    
     return (
         <GlobalContext.Provider value={{
             state,
             addPerson,
-            userLogin: function(username, password) {
-                let newState={...state}
-                
-                if(username && password) {
-                    
-                    const userProfile = state.profiles.find(profile=> profile.email === username)
-                    if(userProfile) {
-                        newState.userProfile = userProfile;
-                        console.log('newState',newState)
-                        setState(newState);
-                    } else {
-                        console.log('could not find username or password')
-                    }
-                } 
-                
-            }
+            userLogin,
+            selectProfile,
         }}>{props.children}</GlobalContext.Provider>
         )
     }

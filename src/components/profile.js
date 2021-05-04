@@ -19,25 +19,17 @@ export function ProfileList(props) {
 }
 
 export function Profile(props) {
-    const {state:{selectedProfile, profiles}} = useGlobalContext();
-    const [state, setState] = useState(selectedProfile);
+    const {selectProfile, state:{selectedProfile, profiles}} = useGlobalContext();
+    const [state, setState] = useState();
     function clickProfile(e) {
-        
+        let newState={...state};
         let id = e.target.id;
         console.log('you clicked', id)
         let newSelection = profiles.find(profile => profile.id === id);
-        console.log('newSelection', newSelection)
-        setState(newSelection);
-        console.log(selectedProfile)
+        //setState(newSelection);
+        selectProfile(newSelection)
+        console.log('aftercahnge',selectedProfile)
     }
-    // function handleInputChange(e) {
-    //     const {target:{value, name}} = e;
-    //     console.log('states', state.nameCreate, state.emailCreate, state.passCreate)
-    //     setState({
-    //       ...state,
-    //       [name]:value,
-    //     })
-    //   }
     return (
         <Link to='/pubprofile'>
         <div className='profile-wrap'>
@@ -48,7 +40,18 @@ export function Profile(props) {
             </div>
             </Link>    
     )
+    // return (
+    //     <Link to='/pubprofile'>
+    //     <div className='profile-wrap'>
+    //     <div className='profile' id={props.user.id} onClick={clickProfile}>
+    //             <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
+    //             <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
+    //         </div>
+    //         </div>
+    //         </Link>    
+    // )
 }
+
 
 
 // export default function ProfileList(props) {
