@@ -36,21 +36,7 @@ export const appData = {
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
     selectedProfile:null,
-    userProfile:null,
-    addPerson: function(chee) {
-        let id = uuidv4();
-        let newPerson = new Profile(chee, id);
-        this.profiles.push(newPerson);
-        this.selectProfile(0);
-        this.adminProf(0);
-    },
-    adminProf: function(index) {
-        this.adminProfile = this.profiles[index];
-    },
-    selectProfile: function(index) {
-        this.selectedProfile = this.profiles[index];
-    },
-
+    userProfile:null,    
 }
 export const GlobalProvider = (props) => {
     const [state, setState] = useState(appData)
@@ -59,6 +45,9 @@ export const GlobalProvider = (props) => {
         let id = uuidv4();
         let newPerson = new Profile({...user, id});
         newState.profiles.push(newPerson);
+        newState.selectedProfile = newPerson;
+        newState.userProfile = newPerson;
+        console.log('userprofile',newState.userProfile,'selectedProfile', newState.selectedProfile)
         setState(newState);
     }
     useEffect(()=> {
@@ -66,14 +55,14 @@ export const GlobalProvider = (props) => {
     },
     []
     )
-
+    
     return (
         <GlobalContext.Provider value={{
             state,
             addPerson,
             userLogin: function(username, password) {
                 let newState={...state}
-
+                
                 if(username && password) {
                     
                     const userProfile = state.profiles.find(profile=> profile.email === username)
@@ -85,8 +74,15 @@ export const GlobalProvider = (props) => {
                         console.log('could not find username or password')
                     }
                 } 
-
+                
             }
         }}>{props.children}</GlobalContext.Provider>
-    )
-}
+        )
+    }
+// addPerson: function(chee) {
+//                 let id = uuidv4();
+//                 let newPerson = new Profile(chee, id);
+//                 this.profiles.push(newPerson);
+//                 this.selectProfile(0);
+//                 this.adminProf(0);
+//             }

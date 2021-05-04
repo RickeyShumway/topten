@@ -5,6 +5,7 @@ import Heading from './rightheading';
 import {useGlobalContext } from './data';
 import {useState} from 'react';
 export default function RightBar(props) {
+  const {...state} = useGlobalContext();
   if(props.view == 'home') {
     return (
       <div className="right-bar">
@@ -60,22 +61,31 @@ export default function RightBar(props) {
   }
 }
 function TextInput(props) {
-  const {userLogin, state:{userProfile, profiles}} = useGlobalContext();
+  const {userLogin, addPerson, state:{userProfile, profiles}} = useGlobalContext();
   const [state, setState] = useState({});
   function handleSubmit (e) {
     e.preventDefault();
     userLogin(state.emailLogin, state.passLogin);
     console.log('userlogin', state)
-    
+  }
+  function handleSubmitNew (e) {
+    e.preventDefault();
+    //addPerson({name:'stick', email:'gmail'})
+    addPerson({
+      name:state.nameCreate, 
+      email:state.emailCreate, 
+      password:state.passCreate
+    })
+
 
   }
   function handleInputChange(e) {
     const {target:{value, name}} = e;
+    console.log('states', state.nameCreate, state.emailCreate, state.passCreate)
     setState({
       ...state,
       [name]:value,
     })
-
   }
 
   console.log('userprofile', userProfile, profiles );
@@ -94,10 +104,10 @@ function TextInput(props) {
   } else {
     return(
       <div className='login-form'>
-          <form className='form' onSubmit={props.click} noValidate autoComplete="off">
-              <TextField id={props.nameId} className="outlined-basic" label="Name" variant="outlined" />
-              <TextField id={props.emailId} className="outlined-basic" label="Email" variant="outlined" />
-              <TextField id={props.passId} className="outlined-basic" label="Password" variant="outlined" />
+          <form className='form' onSubmit={handleSubmitNew} noValidate autoComplete="off">
+              <TextField value={state.nameCreate} onChange={handleInputChange} className="outlined-basic" name="nameCreate" variant="outlined" label='Name'/>
+              <TextField value={state.emailCreate} onChange={handleInputChange} className="outlined-basic" name="emailCreate" variant="outlined" label='Email'/>
+              <TextField value={state.passCreate} onChange={handleInputChange} className="outlined-basic" name="passCreate" variant="outlined" label='Password'/>
               <Button type='submit'>Submit</Button>
           </form>
 
