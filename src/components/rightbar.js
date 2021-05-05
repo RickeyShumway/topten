@@ -2,16 +2,18 @@ import ListContent from './listcontent'
 import {Profile, ProfileList} from './profile'
 import { Button, TextField } from '@material-ui/core';
 import Heading from './rightheading';
+
 import {useGlobalContext } from './data';
 import {useState} from 'react';
 export default function RightBar(props) {
-  const {...state} = useGlobalContext();
+  const {state:{selectedProfile, userProfile}} = useGlobalContext();
+  console.log('this is selected',selectedProfile)
   if(props.view == 'home') {
     return (
       <div className="right-bar">
         <div className="right-left">
           <Heading heading='Explore' />
-          <ProfileList profiles={props.profiles}/>
+          <ProfileList />
         </div>
         <div className="right-right"></div>
       </div>
@@ -36,10 +38,10 @@ export default function RightBar(props) {
     <div className="right-bar">
       <div className="right-left">
         <Heading heading='Profile' />
-        <ListContent user={props.selected}/>
+        <ListContent user={selectedProfile}/>
       </div>
       <div className="right-right">
-        <Profile user={props.selected}/>
+        <Profile user={selectedProfile}/>
       </div>
     </div>
     )
@@ -53,7 +55,7 @@ export default function RightBar(props) {
       </div>
       <div className="right-right">
        User Profile
-        <Profile user={props.selected}/>
+        <Profile user={userProfile}/>
         
       </div>
     </div>

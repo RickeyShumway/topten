@@ -6,7 +6,8 @@ import {useGlobalContext } from './data';
 import {useState, useRef } from 'react';
 const emptyImage = <FontAwesomeIcon size='100px' icon={faUserCircle} />
 
-export function ProfileList(props) {
+
+export function ProfileList() {
     const {state:{profiles}} = useGlobalContext();
     const [state, setState] = useState();
     let profArr = profiles;
@@ -19,26 +20,24 @@ export function ProfileList(props) {
 }
 
 export function Profile(props) {
-    const {selectProfile, state:{selectedProfile, profiles}} = useGlobalContext();
+    const {selectProfile} = useGlobalContext();
     const [state, setState] = useState();
+    let profile = props.user;
     function clickProfile(e) {
-        let newState={...state};
-        let id = e.target.id;
-        console.log('you clicked', id)
-        let newSelection = profiles.find(profile => profile.id === id);
-        //setState(newSelection);
+        console.log('you clicked', profile)
+        let newSelection = profile.id;
         selectProfile(newSelection)
-        console.log('aftercahnge',selectedProfile)
     }
     return (
         <Link to='/pubprofile'>
         <div className='profile-wrap'>
-        <div className='profile' id={props.user.id} onClick={clickProfile}>
-                <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
-                <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
+        <div className='profile' onClick={clickProfile}>
+                <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+                <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
             </div>
             </div>
-            </Link>    
+            </Link>
+   
     )
     // return (
     //     <Link to='/pubprofile'>

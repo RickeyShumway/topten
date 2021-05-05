@@ -1,14 +1,10 @@
-// KEY = 'AIzaSyCLu3vq42z4Ay_DJOfvGSjiS-RDno-ETpA'
-let url = 'https://www.youtube.com/watch?v=8_T5oSUP-Kc';
-// console.log(fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=8_T5oSUP-Kc&format=json')
-// .then(res => res.json())
-// .then(data => {return data.html}))
-// let iframe = fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=8_T5oSUP-Kc&format=json')
-// .then(res => res.json())
-// .then(data => {iframe = data.html})
-// await console.log('iframe', iframe);
 
-async function fetchYoutube(link) {
+let urlTest= 'https://www.youtube.com/watch?v=8_T5oSUP-Kc';
+
+
+
+
+export async function fetchYoutube(link) {
     let response = await fetch(`https://www.youtube.com/oembed?url=${link}&format=json`)
     let stringify = await response.json();
     await console.log('stringigyf', stringify.html);

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube, faSpotify, faImdb } from '@fortawesome/free-brands-svg-icons';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 const youtubeIcon = <FontAwesomeIcon icon={faYoutube} />
 const spotifyIcon = <FontAwesomeIcon icon={faSpotify} />
@@ -16,8 +16,8 @@ export class Profile {
         this.name = name;
         this.email = email;
         this.id = id;
-        this.youtube = true;
-        this.urls = ['https://www.youtube.com/watch?v=y1hWi-vgoaU','https://www.youtube.com/watch?v=1_qHb40iq64','https://www.youtube.com/watch?v=nZ67YBF3qRc'];
+        this.urls = [];
+        this.iframes = ['<iframe width="560" height="315" src="https://www.youtube.com/embed/ZRd3lrukxu8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>']
         this.pic = emptyImage;
     }
     addUrl(url, index) {
@@ -32,7 +32,7 @@ export const appData = {
     media: ['Youtube, Spotify, IMBD'],
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
-    selectedProfile:null,
+    selectedProfile: new Profile({name:'TestMan', id:324234}),
     userProfile:null,
 }
 export const GlobalProvider = (props) => {
@@ -44,7 +44,6 @@ export const GlobalProvider = (props) => {
         newState.profiles.push(newPerson);
         newState.selectedProfile = newPerson;
         newState.userProfile = newPerson;
-        console.log('userprofile',newState.userProfile,'selectedProfile', newState.selectedProfile)
         setState(newState);
     }
     const userLogin = function(username, password) {
@@ -60,13 +59,16 @@ export const GlobalProvider = (props) => {
             }
         }
     };
-    const selectProfile = function(data) {
+    const selectProfile = function(id) {
         let newState={...state};
+        let data = newState.profiles.find(profile => profile.id === id)
         newState.selectedProfile = data;
         setState(newState);
     }
     useEffect(()=> {
         addPerson({name:'jon', email:'uuuu@gmail.com'})
+        addPerson({name:'kyle', email:'ff'})
+
     },
     []
     )

@@ -9,10 +9,9 @@ import Admin from './views/admin.js'
 import PubProfile from './views/pubprofile.js'
 import LeftBar from './components/leftbar';
 import {appData, Profile} from './components/data'
+import {useGlobalContext } from './components/data';
+import {useState, useRef } from 'react';
 window.React = React;
-
-//appData.addPerson('rickey');
-
 
 function TopBar() {
   return (
