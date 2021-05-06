@@ -28,6 +28,7 @@ a {
 .top-bar .view-links {
   display: flex;
   width: 50%;
+  justify-content: flex-end;
 }
 
 .main-content {
@@ -89,6 +90,47 @@ a {
 }
 .login-form .outlined-basic {
   margin-top: 10%;
+}
+
+.uni-list {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.list-item {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.title-edit-wrap {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.item-title {
+  width: 90%;
+}
+
+.list-num {
+  width: 10%;
+}
+
+.edit {
+  align-self: center;
+  justify-self: flex-end;
+  font-size: small;
+}
+
+.empty-title {
+  height: 80px;
+  justify-self: center;
+  padding-left: 9.8%;
+  color: gray;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -18,8 +18,21 @@ export class Profile {
         this.name = name;
         this.email = email;
         this.id = id;
-        this.videos=[];
-        this.urls = [...testArr];
+        this.videos=[{
+            title: "GoPro: Lion Mouth Cam", 
+            author_name: "GoPro",
+            author_url: "https://www.youtube.com/user/GoProCamera",
+            type: "video",
+            height: 113,
+            width: 200,
+            version: "1.0", 
+            provider_name: "YouTube",
+            provider_url: "https://www.youtube.com/",
+            thumbnail_height: 360, thumbnail_width: 480,
+            thumbnail_url: "https://i.ytimg.com/vi/8_T5oSUP-Kc/hqdefault.jpg",
+            html: "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/8_T5oSUP-Kc?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
+        }];
+        this.urls = [];
         this.pic = emptyImage;
     }
     addUrl(url, index) {
@@ -40,13 +53,18 @@ export const appData = {
 export const GlobalProvider = (props) => {
     const [state, setState] = useState(appData)
     const addPerson = function(user) {
-        let newState={...state};
-        let id = uuidv4();
-        let newPerson = new Profile({...user, id});
-        newState.profiles.push(newPerson);
-        newState.selectedProfile = newPerson;
-        newState.userProfile = newPerson;
-        setState(newState);
+        console.log(user)
+        if(user.name && user.email && user.password) {
+            let newState={...state};
+            let id = uuidv4();
+            let newPerson = new Profile({...user, id});
+            newState.profiles.push(newPerson);
+            newState.selectedProfile = newPerson;
+            newState.userProfile = newPerson;
+            setState(newState);
+        } else {
+            console.log('please fill out all the fields')
+        }
     }
     const userLogin = function(username, password) {
         let newState={...state}
@@ -70,12 +88,14 @@ export const GlobalProvider = (props) => {
     const  addVideo = async function(url, index) {
         let newState={...state};
         let data = await fetchYoutube(url);
-        newState.selectProfile.videos[index] =  await data;
+        console.log(data)
+        newState.selectedProfile.videos[index] =  await data;
         await setState(newState);
+        await console.log(state.selectedProfile.videos)
     }
     useEffect(()=> {
-        addPerson({name:'jon', email:'uuuu@gmail.com'})
-        addPerson({name:'kyle', email:'ff'})
+        addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})
+        addPerson({name:'kyle', email:'ff',password:'jjjjjj'})
 
     },
     []

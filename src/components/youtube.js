@@ -7,8 +7,8 @@ let urlTest= 'https://www.youtube.com/watch?v=8_T5oSUP-Kc';
 export default async function fetchYoutube(link) {
     let response = await fetch(`https://www.youtube.com/oembed?url=${link}&format=json`)
     let stringify = await response.json();
-    await console.log('stringigyf', stringify.html);
-    let iframe = await stringify.html;
+    await console.log('stringigyf', stringify);
+    let iframe = await stringify;
     
     //document.getElementById('test').innerHTML = await iframe;
     return await iframe;
