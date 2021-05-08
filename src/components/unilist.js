@@ -10,40 +10,55 @@ import { Markup } from 'interweave';
 export default function UniList(props) {
     let order = Array.apply(null, Array(10)).map(function () {})
     //let order = [1,2,3,4,5,6,7,8,9,10];
-    let links = [...props.user.videos];
+    console.log(props.view)
+    let links = [...props.user.urls];
     console.log('1',links)
     let final = order.splice(0, links.length, ...links)
     console.log('2',links, order)
-
-    return(
-        <div className='uni-list'>
-            {order.map((item, index) => <ListItem order={index+1} url={item}/>)}
-        </div>
-    )
+    if(props.view== 'view') {
+        return(
+            <div className='uni-list'>
+                {order.map((item, index) => <ListItemView  order={index+1} url={item}/>)}
+            </div>
+        )
+    } else if(props.view == 'edit') {
+        return (
+            <div className='uni-list'>
+                {order.map((item, index) => <ListItem  order={index+1} url={item}/>)}
+            </div>
+        )
+    }
 }
 
 function ListItem(props) {
     const {addVideo} = useGlobalContext();
     const [state, setState] = useState({
         edit:false,
-        
     });
     let embed;
     if(props.url) {
-        embed = props.url.html;
-        console.log('these', embed)
-       
+        embed = props.url;
+        
     }
     function handleSubmit(e) {
         e.preventDefault();
-        addVideo(state.urlInput)
-        console.log('was submitted')
+        if(state.urlInput) {
+            addVideo(state.urlInput, props.order -1)
+            console.log('was submitted')
+        } 
+        let newState = {edit:false}
+        setState(newState)
+
 
     }
-    function findYoutubeId(url='https://youtu.be/y1hWi-vgoaU') {
-        let [youtube, id] = url.split('.be/');
-        console.log(id)
-        return id;
+    function findYoutubeId(link) {
+        let [shareLink, id] = link.split('.be/');
+        let [url, id2] = link.split('=');
+        if(id) {
+            return id;
+        } else {
+            return id2;
+        }   
     }
     function handleInputChange(e) {
         const {target:{value, name}} = e;
@@ -53,7 +68,7 @@ function ListItem(props) {
           [name]:value,
         })
       }
-    if(props.url?.html && state.edit == false) {
+    if(props?.url && state.edit == false) {
         return(
             <div className='list-item'>
                 <div className='title-edit-wrap'>
@@ -61,21 +76,14 @@ function ListItem(props) {
                         {props.order}.
                     </div>
                     <div className='item-title'>
-                        Hello
                     </div>
                     <FontAwesomeIcon className='edit' icon={faEdit} onClick={() => {
                         let newState ={edit:true}
                         setState(newState)}}/>
                 </div>
-                <span dangerouslySetInnerHTML={{__html: embed}}></span>
-                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${findYoutubeId()}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                {/* <Markup content={'<iframe src="http://google.com"></iframe>'} /> */}
-                    {/* <Video link={props.url.html}/> */}
-                    
-                
+                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${findYoutubeId(embed)}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
             </div>
         )
-        
     } else if(state.edit == false) {
         return(
             <div className='list-item'>
@@ -84,7 +92,7 @@ function ListItem(props) {
                     {props.order}.
                 </div>
                 <div className='item-title'>
-                    Hello
+                   EMPTY
                 </div>
                 <FontAwesomeIcon className='edit' icon={faEdit} onClick={() => {
                         let newState ={edit:true}
@@ -107,9 +115,7 @@ function ListItem(props) {
                  {props.order}.
                 </div>
                 <>
-                    <form className='form empty-title' onSubmit={handleSubmit} onBlur={()=>{
-                        let newState ={edit:false}
-                        setState(newState)}} noValidate autoComplete="off">
+                    <form className='form empty-title' onSubmit={handleSubmit} onBlur={handleSubmit} noValidate autoComplete="off">
                         <TextField value={state.urlInput} onChange={handleInputChange} name='urlInput' autoFocus className="outlined-basic" label="Enter URL" variant="outlined" />
                         <Button type='submit'>Submit</Button>
                     </form>
@@ -117,4 +123,49 @@ function ListItem(props) {
             </div>
         )
     }
+}
+function ListItemView(props) {
+    let embed;
+    if(props.url) {
+        embed = props.url;
+        
+    }
+    function findYoutubeId(link) {
+        let [shareLink, id] = link.split('.be/');
+        let [url, id2] = link.split('=');
+        if(id) {
+            return id;
+        } else {
+            return id2;
+        }   
+    }
+    if(props?.url) {
+        return(
+            <div className='list-item'>
+                <div className='title-edit-wrap'>
+                    <div className='list-num'>
+                        {props.order}.
+                    </div>
+                    <div className='item-title'>
+                    </div>
+                </div>
+                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${findYoutubeId(embed)}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
+            </div>
+        )
+    } else {
+        return(
+            <div className='list-item'>
+                <div className='title-edit-wrap'>
+                <div className='list-num'>
+                    {props.order}.
+                </div>
+                <div className='item-title'>
+                   EMPTY
+                </div>
+                
+                        </div>
+             
+            </div>
+        )
+                    }
 }

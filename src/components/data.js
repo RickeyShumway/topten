@@ -18,21 +18,8 @@ export class Profile {
         this.name = name;
         this.email = email;
         this.id = id;
-        this.videos=[{
-            title: "GoPro: Lion Mouth Cam", 
-            author_name: "GoPro",
-            author_url: "https://www.youtube.com/user/GoProCamera",
-            type: "video",
-            height: 113,
-            width: 200,
-            version: "1.0", 
-            provider_name: "YouTube",
-            provider_url: "https://www.youtube.com/",
-            thumbnail_height: 360, thumbnail_width: 480,
-            thumbnail_url: "https://i.ytimg.com/vi/8_T5oSUP-Kc/hqdefault.jpg",
-            html: "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/8_T5oSUP-Kc?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
-        }];
-        this.urls = [];
+        this.videos=[];
+        this.urls = ['https://www.youtube.com/watch?v=M3Dm9zDnOyE'];
         this.pic = emptyImage;
     }
     addUrl(url, index) {
@@ -87,11 +74,12 @@ export const GlobalProvider = (props) => {
     }
     const  addVideo = async function(url, index) {
         let newState={...state};
+        newState.selectedProfile.urls[index] = url;
         let data = await fetchYoutube(url);
         console.log(data)
         newState.selectedProfile.videos[index] =  await data;
         await setState(newState);
-        await console.log(state.selectedProfile.videos)
+        await console.log(state.selectedProfile.urls)
     }
     useEffect(()=> {
         addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})

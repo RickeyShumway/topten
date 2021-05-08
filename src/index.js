@@ -5,6 +5,8 @@ import './index.css';
 import { TopBar, MainContent, BottomBar, ListItem} from './App';
 import reportWebVitals from './reportWebVitals';
 import {GlobalProvider} from './components/data'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Drag from './components/drag'
 
 
 ReactDOM.render(
@@ -12,7 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
     <TopBar />
+    <DragDropContext>
     <MainContent />
+    </DragDropContext>
     <BottomBar />
     </Router>
   </React.StrictMode>

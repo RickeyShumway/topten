@@ -2,7 +2,8 @@ import ListContent from './listcontent'
 import {Profile, ProfileList} from './profile'
 import { Button, TextField } from '@material-ui/core';
 import Heading from './rightheading';
-
+import { Route, Link, Switch } from 'react-router-dom';
+import EditProfile from './editProfile';
 import {useGlobalContext } from './data';
 import {useState} from 'react';
 export default function RightBar(props) {
@@ -38,7 +39,7 @@ export default function RightBar(props) {
     <div className="right-bar">
       <div className="right-left">
         <Heading heading='Profile' />
-        <ListContent user={selectedProfile}/>
+        <ListContent per='view' user={selectedProfile}/>
       </div>
       <div className="right-right">
         <Profile user={selectedProfile}/>
@@ -51,15 +52,30 @@ export default function RightBar(props) {
     <div className="right-bar">
       <div className="right-left">
         <Heading heading='Profile' />
-        <ListContent user={props.selected}/>
+        <ListContent per='edit' user={userProfile}/>
       </div>
       <div className="right-right">
        User Profile
         <Profile user={userProfile}/>
-        
+        <EditProfile />
       </div>
     </div>
     )
+  }
+  if(props.view == 'edit-order') {
+    return(
+
+      <div className="right-bar">
+        <div className="right-left">
+         <ListContent per='drag'/>
+        </div>
+        <div className="right-right">
+          User Profile
+        <Profile user={userProfile}/>
+        <EditProfile />
+      </div>
+    </div>
+      )
   }
 }
 function TextInput(props) {
@@ -78,8 +94,9 @@ function TextInput(props) {
       email:state.emailCreate, 
       password:state.passCreate
     })
-
-
+    if(userProfile) {
+      
+    }
   }
   function handleInputChange(e) {
     const {target:{value, name}} = e;
@@ -106,6 +123,7 @@ function TextInput(props) {
   } else {
     return(
       <div className='login-form'>
+          
           <form className='form' onSubmit={handleSubmitNew} noValidate autoComplete="off">
               <TextField value={state.nameCreate} onChange={handleInputChange} className="outlined-basic" name="nameCreate" variant="outlined" label='Name'/>
               <TextField value={state.emailCreate} onChange={handleInputChange} className="outlined-basic" name="emailCreate" variant="outlined" label='Email'/>
