@@ -45,6 +45,16 @@ a {
         width: 90%;
         display: flex;
         overflow-y:scroll;
+        .right-left-special {
+            background-color: lightblue;
+            width: 50%;
+            min-height: 90vh;
+            height: fit-content;
+            display: flex;
+            .dragging-list {
+                width: 95%;
+            }
+        }
         .right-left {
             background-color: lightblue;
             width: 50%;
@@ -124,4 +134,11 @@ a {
     padding-left: 9.8%;
     color: gray;
    
+}
+.drag-item {
+    background-color: green;
+}
+.down-list {
+    
+    width: 5%;
 }

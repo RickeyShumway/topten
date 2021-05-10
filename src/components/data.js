@@ -19,7 +19,7 @@ export class Profile {
         this.email = email;
         this.id = id;
         this.videos=[];
-        this.urls = ['https://www.youtube.com/watch?v=M3Dm9zDnOyE'];
+        this.urls = [];
         this.pic = emptyImage;
     }
     addUrl(url, index) {
@@ -79,7 +79,10 @@ export const GlobalProvider = (props) => {
         console.log(data)
         newState.selectedProfile.videos[index] =  await data;
         await setState(newState);
-        await console.log(state.selectedProfile.urls)
+        await console.log('links', state.selectedProfile.urls, 'fetch',state.selectedProfile)
+    }
+    const reorderList = function() {
+        console.log('list has been reordered')
     }
     useEffect(()=> {
         addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})
@@ -95,6 +98,7 @@ export const GlobalProvider = (props) => {
             userLogin,
             selectProfile,
             addVideo,
+            reorderList,
         }}>{props.children}</GlobalContext.Provider>
         )
     }

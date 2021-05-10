@@ -62,12 +62,26 @@ export default function RightBar(props) {
     </div>
     )
   }
+
   if(props.view == 'edit-order') {
     return(
 
       <div className="right-bar">
-        <div className="right-left">
+        <div className="right-left-special">
+          <div className='down-list'>
+            <div className='down-number'>1.</div>
+            <div className='down-number'>2.</div>
+            <div className='down-number'>3.</div>
+            <div className='down-number'>4.</div>
+            <div className='down-number'>5.</div>
+            <div className='down-number'>6.</div>
+            <div className='down-number'>7.</div>
+            <div className='down-number'>8.</div>
+            <div className='down-number'>9.</div>
+            <div className='down-number'>10.</div>
+          </div>
          <ListContent per='drag'/>
+         
         </div>
         <div className="right-right">
           User Profile

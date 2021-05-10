@@ -43,7 +43,7 @@ function ListItem(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if(state.urlInput) {
-            addVideo(state.urlInput, props.order -1)
+            addVideo(state.urlInput, props.order-1)
             console.log('was submitted')
         } 
         let newState = {edit:false}
