@@ -8,6 +8,7 @@ html, body, #root {
 a {
   text-decoration: none;
   color: black;
+  margin: 1vw;
 }
 
 .bar {
@@ -41,7 +42,7 @@ a {
   width: 10%;
   min-width: 65px;
   height: 100%;
-  background-color: gray;
+  background-color: light-blue;
 }
 .main-content .right-bar {
   width: 90%;
@@ -52,7 +53,6 @@ a {
   background-color: lightblue;
   width: 50%;
   min-height: 90vh;
-  overflow-y: scroll;
   display: flex;
 }
 .main-content .right-bar .right-left-special .dragging-list {
@@ -70,7 +70,7 @@ a {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: light-blue;
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -79,12 +79,12 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: purple;
-  width: 50%;
-  margin: 50px;
+  border-radius: 1vw;
+  margin: 1vw;
+  width: 15vh;
 }
 .main-content .right-bar .right-right {
-  background-color: lightgreen;
+  background-color: #cdcdcd;
   width: 50%;
 }
 
@@ -123,10 +123,12 @@ a {
 
 .item-title {
   width: 90%;
+  margin: 1vw;
 }
 
 .list-num {
   width: 10%;
+  margin: 1vw;
 }
 
 .edit {
@@ -143,7 +145,8 @@ a {
 }
 
 .drag-item {
-  background-color: green;
+  border: 1px solid black;
+  border-radius: 5px;
   height: 9%;
 }
 
@@ -153,6 +156,40 @@ a {
 }
 .down-list .down-number {
   height: 9%;
+}
+
+.heading {
+  margin: 1vw;
+  font-size: 1.3em;
+}
+
+.svg-inline--fa {
+  color: #727272;
+  margin: 1vw;
+  font-size: 3.5em;
+}
+
+.edit {
+  font-size: 0.9em;
+  margin: 1vw;
+}
+
+.profile-name {
+  margin: 1vw;
+}
+
+.profile {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #e6e6ee;
+  margin: 1vw;
+  width: 15vh;
+}
+
+.social-list {
+  background-color: #cecece;
 }
 
 /*# sourceMappingURL=style.css.map */

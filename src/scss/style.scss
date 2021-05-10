@@ -1,10 +1,13 @@
 @import 'mixins';
+$background-color: light-blue;
+$default-margin: 1vw;
 html, body, #root {
     @include fill-flex;
 }
 a {
     text-decoration: none;
     color:black;
+    margin: $default-margin;
 }
 .bar {
    box-sizing: border-box;
@@ -13,11 +16,13 @@ a {
     height: 5vh;
     font-size: 1.4em;
     background-color: rgb(175, 104, 247);
+    
 }
 .top-bar {
     box-sizing: border-box;
     .logo {
         width: 50%;
+        
       }
     .view-links {
         display: flex;
@@ -37,7 +42,8 @@ a {
         width: 10%;
         min-width: 65px;
         height: 100%;
-        background-color: gray;
+        background-color:$background-color;
+        
         
       }
       .right-bar {
@@ -49,7 +55,7 @@ a {
             background-color: lightblue;
             width: 50%;
             min-height: 90vh;
-            overflow-y: scroll;
+            // overflow-y: scroll;
             
             display: flex;
             .dragging-list {
@@ -69,7 +75,7 @@ a {
                 justify-content: center;
                 width: 100%;
                 height: 100%;
-                background-color: red;
+                background-color: $background-color;
                 flex-direction: row;
                 flex-wrap: wrap;
                 .profile {
@@ -77,15 +83,18 @@ a {
                     display: flex;
                     align-items: center;
                     flex-direction: column;
-                    background-color: purple;
-                    width: 50%;
-                    margin: 50px;
+                    border-radius: $default-margin;
+
+                    
+                    
+                    margin: $default-margin;
+                    width: 15vh;
                    
                 }
             }
         }
         .right-right {
-            background-color: lightgreen;
+            background-color: rgb(205, 205, 205);
             width: 50%;
             
         }
@@ -99,6 +108,7 @@ a {
           flex-direction: column;
           width: 100%;
           align-items: center;
+         
       }
       .outlined-basic {
           margin-top: 10%;
@@ -119,9 +129,11 @@ a {
 }
 .item-title {
     width: 90%;
+    margin: $default-margin;
 }
 .list-num {
     width: 10%;
+    margin: $default-margin;
 }
 .edit {
     align-self: center;
@@ -136,7 +148,8 @@ a {
    
 }
 .drag-item {
-    background-color: green;
+    border: 1px solid black;
+    border-radius: 5px;
     height: 9%;
 }
 .down-list {
@@ -145,4 +158,37 @@ a {
     .down-number {
         height: 9%;
     }
+}
+.heading {
+    margin: $default-margin;
+    font-size: 1.3em;
+}
+.svg-inline--fa {
+    color: rgb(114, 114, 114);
+    margin: $default-margin;
+    font-size: 3.5em;
+}
+.edit {
+    font-size: .9em;
+    margin: $default-margin;
+}
+.profile-name {
+    margin: $default-margin;
+}
+.profile {
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    background-color: rgb(230, 230, 238);
+
+    
+    
+    margin: $default-margin;
+    width: 15vh;
+   
+}
+.social-list {
+    background-color: rgb(206, 206, 206);
 }

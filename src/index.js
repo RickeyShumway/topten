@@ -7,16 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import {GlobalProvider} from './components/data'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Drag from './components/drag'
-
+function handleOnDragEnd(result) {
+  console.log(result);
+}
 
 ReactDOM.render(
   <GlobalProvider>
   <React.StrictMode>
     <Router>
     <TopBar />
-    <DragDropContext>
+    
     <MainContent />
-    </DragDropContext>
+    
     <BottomBar />
     </Router>
   </React.StrictMode>

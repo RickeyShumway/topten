@@ -8,6 +8,7 @@ import { Markup } from 'interweave';
 
 
 export default function UniList(props) {
+
     let order = Array.apply(null, Array(10)).map(function () {})
     //let order = [1,2,3,4,5,6,7,8,9,10];
     console.log(props.view)
@@ -31,7 +32,7 @@ export default function UniList(props) {
 }
 
 function ListItem(props) {
-    const {addVideo} = useGlobalContext();
+    const {addVideo, state:{userProfile}} = useGlobalContext();
     const [state, setState] = useState({
         edit:false,
     });
@@ -46,8 +47,11 @@ function ListItem(props) {
             addVideo(state.urlInput, props.order-1)
             console.log('was submitted')
         } 
-        let newState = {edit:false}
+        let newState = {
+            ...state,
+            edit:false}
         setState(newState)
+
 
 
     }
@@ -76,6 +80,7 @@ function ListItem(props) {
                         {props.order}.
                     </div>
                     <div className='item-title'>
+                        {userProfile.videos[props.order-1].title}
                     </div>
                     <FontAwesomeIcon className='edit' icon={faEdit} onClick={() => {
                         let newState ={edit:true}

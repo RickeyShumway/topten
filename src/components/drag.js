@@ -4,10 +4,30 @@ import {useState} from 'react';
 import { Button } from '@material-ui/core';
 export default function Drag() {
     const {reorderList, state:{userProfile}} = useGlobalContext();
-    const [state, setState] = useState(userProfile);
+    const [state, setState] = useState({
+        userProfile
+    });
+    function handleOnDragEnd(result) {
+        let newUser = {...userProfile};
+
+        console.log('dragesoure',result.source.index,'drag destination',result.destination.index);
+        const tempArr1 = Array.from(newUser.videos);
+        const [reorderedItem1] = tempArr1.splice(result.source.index,1)
+        tempArr1.splice(result.destination.index,0,reorderedItem1);
+        console.log('temp array, and reordered',tempArr1)
+        const tempArr2 = Array.from(newUser.urls);
+        const [reorderedItem2] = tempArr2.splice(result.source.index,1)
+        tempArr2.splice(result.destination.index,0,reorderedItem2);
+        newUser.videos=tempArr1;
+        newUser.urls=tempArr2;
+        console.log('newUser', newUser)
+        reorderList(newUser);
+        setState(userProfile)
+
+    }
     console.log('this is the state', state)
     return(
-       
+        <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId='items'>
                 {(provided) => (
                     <div className='dragging-list' {...provided.droppableProps} ref={provided.innerRef}>
@@ -17,15 +37,16 @@ export default function Drag() {
                     </div>
                 )}
             </Droppable> 
+            </DragDropContext>
        
     )
 }
 function DraggingList() {
-    const {reorderList, state:{userProfile}} = useGlobalContext({
-        status: 'EMPTY',
-        
+    const {reorderList, state:{userProfile}} = useGlobalContext();
+    const [state, setState] = useState({
+        userProfile,
     });
-    const [state, setState] = useState();
+    
     let titles = ["EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY"];
     // let titles=['cool','chill', 'nice', 'wow', 'woo', 'chee', 'hoo', 'cmon', 'baby', 'haha']
     let links = userProfile.urls;
@@ -40,13 +61,13 @@ function DraggingList() {
             return "EMPTY"
         }
         })
-    console.log('objArr', objArr);
+    // console.log('objArr', objArr);
     
-    console.log(objArr)
+    // console.log(objArr)
     return(
         <>
             {objArr.map((obj, index) => {
-                console.log(obj)
+                // console.log(obj)
                 let title;
                 if (obj==="EMPTY") {
                     title = 'EMPTY'

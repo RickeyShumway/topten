@@ -57,10 +57,10 @@ export default function RightBar(props) {
         <ListContent per='edit' user={userProfile}/>
       </div>
       <div className="right-right">
-       User Profile
+       <Heading heading='User Profile' />
         <Profile user={userProfile}/>
         <EditProfile />
-        <Spotify />
+        
       </div>
     </div>
     )

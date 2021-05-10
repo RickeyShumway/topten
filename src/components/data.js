@@ -74,19 +74,24 @@ export const GlobalProvider = (props) => {
     }
     const  addVideo = async function(url, index) {
         let newState={...state};
-        newState.selectedProfile.urls[index] = url;
+        newState.userProfile.urls[index] = url;
         let data = await fetchYoutube(url);
         console.log(data)
-        newState.selectedProfile.videos[index] =  await data;
+        newState.userProfile.videos[index] =  await data;
         await setState(newState);
-        await console.log('links', state.selectedProfile.urls, 'fetch',state.selectedProfile)
+        await console.log('links', state.userProfile.urls, 'fetch',state.userProfile)
     }
-    const reorderList = function() {
-        console.log('list has been reordered')
+    const reorderList = function(obj) {
+        console.log('list has been reordered', obj)
+        let newState={...state};
+        newState.userProfile = obj;
+        console.log('newstate',newState)
+        setState(newState);
     }
     useEffect(()=> {
         addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})
         addPerson({name:'kyle', email:'ff',password:'jjjjjj'})
+        
 
     },
     []
