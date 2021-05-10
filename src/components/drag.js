@@ -74,7 +74,7 @@ function DragItem(props) {
         return (
             <Draggable key={props.title + props.index} draggableId={props.title} index={props.index}>
                 {(provided) => (
-                    <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className="drag-item">
+                    <div ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className="drag-item" style={{height:'100px'}}>
                         {props.title}
                     </div>
                 )}

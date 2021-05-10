@@ -52,7 +52,7 @@ a {
   background-color: lightblue;
   width: 50%;
   min-height: 90vh;
-  height: fit-content;
+  overflow-y: scroll;
   display: flex;
 }
 .main-content .right-bar .right-left-special .dragging-list {
@@ -62,7 +62,6 @@ a {
   background-color: lightblue;
   width: 50%;
   min-height: 90vh;
-  height: fit-content;
   overflow-y: scroll;
 }
 .main-content .right-bar .right-left .profile-list {
@@ -145,10 +144,15 @@ a {
 
 .drag-item {
   background-color: green;
+  height: 9%;
 }
 
 .down-list {
+  height: 100%;
   width: 5%;
+}
+.down-list .down-number {
+  height: 9%;
 }
 
 /*# sourceMappingURL=style.css.map */

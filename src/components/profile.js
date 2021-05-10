@@ -20,7 +20,7 @@ export function ProfileList() {
 }
 
 export function Profile(props) {
-    const {selectProfile} = useGlobalContext();
+    const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();
     const [state, setState] = useState();
     let profile = props.user;
     function clickProfile(e) {
@@ -28,6 +28,19 @@ export function Profile(props) {
         let newSelection = profile.id;
         selectProfile(newSelection)
     }
+    if(selectedProfile == userProfile) {
+        return (
+            <Link to='/admin'>
+            <div className='profile-wrap'>
+            <div className='profile' onClick={clickProfile}>
+                    <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+                    <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
+                </div>
+                </div>
+                </Link>
+        )
+    }
+    else{
     return (
         <Link to='/pubprofile'>
         <div className='profile-wrap'>
@@ -39,6 +52,7 @@ export function Profile(props) {
             </Link>
    
     )
+    }
     // return (
     //     <Link to='/pubprofile'>
     //     <div className='profile-wrap'>

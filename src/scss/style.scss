@@ -49,7 +49,8 @@ a {
             background-color: lightblue;
             width: 50%;
             min-height: 90vh;
-            height: fit-content;
+            overflow-y: scroll;
+            
             display: flex;
             .dragging-list {
                 width: 95%;
@@ -59,7 +60,6 @@ a {
             background-color: lightblue;
             width: 50%;
             min-height: 90vh;
-            height: fit-content;
             overflow-y: scroll;
            
             
@@ -137,8 +137,12 @@ a {
 }
 .drag-item {
     background-color: green;
+    height: 9%;
 }
 .down-list {
-    
+    height: 100%;
     width: 5%;
+    .down-number {
+        height: 9%;
+    }
 }
