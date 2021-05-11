@@ -11,7 +11,7 @@ export default function UniList(props) {
 
     let order = Array.apply(null, Array(10)).map(function () {})
     //let order = [1,2,3,4,5,6,7,8,9,10];
-    // console.log(props.view)
+    console.log('user',props.user)
     let links = [...props.user.urls];
     // console.log('1',links)
     let final = order.splice(0, links.length, ...links)
@@ -130,6 +130,10 @@ function ListItem(props) {
     }
 }
 function ListItemView(props) {
+    const {state:{selectedProfile}} = useGlobalContext();
+    const [state, setState] = useState();
+    console.log('plase work',selectedProfile)
+
     let embed;
     if(props.url) {
         embed = props.url;
@@ -152,6 +156,7 @@ function ListItemView(props) {
                         {props.order}.
                     </div>
                     <div className='item-title'>
+                    {selectedProfile.videos[props.order-1].title}
                     </div>
                 </div>
                 <iframe width="560" height="315" src={`https://www.youtube.com/embed/${findYoutubeId(embed)}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    

@@ -30,7 +30,7 @@ function TopBar() {
           <Link to="/login">Login</Link>
         </div>
         <div className="profile-link" onClick={()=> selectProfile(userProfile.id)}>
-          <Link to="/admin">Profile</Link>
+          <Link to={`/admin/${userProfile.id}`}>Profile</Link>
         </div>
         </div>
       </div>
@@ -60,13 +60,13 @@ function MainContent() {
         <Route exact path="/">
           <HomePage profileList={[...appData.profiles]}/>
         </Route>
-        <Route path="/pubprofile">
+        <Route path="/pubprofile/:id">
           <PubProfile selected={appData.selectedProfile}/>
         </Route>
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/admin">
+        <Route path="/admin/:id">
           <Admin selected={appData.userProfile}/>
         </Route>
         <Route path="/edit-order">

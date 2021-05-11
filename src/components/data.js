@@ -12,7 +12,7 @@ const GlobalContext = createContext();
 export const useGlobalContext = () => {
     return useContext(GlobalContext);
 }
-let testArr = ['https://www.youtube.com/watch?v=y1hWi-vgoaU','https://www.youtube.com/watch?v=1_qHb40iq64', 'https://www.youtube.com/watch?v=nZ67YBF3qRc','https://www.youtube.com/watch?v=adKEqin5SoI']
+let testArr = ['https://www.youtube.com/watch?v=y1hWi-vgoaU','https://www.youtube.com/watch?v=1_qHb40iq64', 'https://www.youtube.com/watch?v=nZ67YBF3qRc','https://www.youtube.com/watch?v=adKEqin5SoI', 'https://www.youtube.com/watch?v=8UvS0CxIG_o']
 export class Profile {
     constructor({name, email, id}) {
         this.name = name;
@@ -20,7 +20,7 @@ export class Profile {
         this.id = id;
         this.videos=[];
         this.urls = [];
-        this.pic = emptyImage;
+        this.pic = null;
     }
     addUrl(url, index) {
         this.urls.splice(index, 1, url);
@@ -37,25 +37,30 @@ export const appData = {
     selectedProfile: null,
     userProfile:null,
 }
-export const GlobalProvider = (props) => {
-    // localStorage.getItem('appDataJson', JSON.stringify());
-    // const [state, setState] = useState(appData)
-    const [state, setState] = useState(() => {
-        try{
-            let info = localStorage.getItem('appDataJson');
-            return  JSON.parse(info);
-        } catch(error) {
-            console.log('no local storage');
-            return appData
-        }
+const getStorage = () => {
+    try{
+        let info = localStorage.getItem('appDataJson');
 
-    })
+        return  info ? JSON.parse(info): appData;
+
+    } catch(error) {
+        console.log('no local storage');
+        return appData
+    }
+
+}
+export const GlobalProvider =  (props) => {
+    // let appInfo = localStorage.getItem('appDataJson', JSON.stringify());
+    // console.log(appInfo)
+    // const [state, setState] = useState(appData)
+
+    const [state, setState] = useState(getStorage());
     
     // const [state, setState] = useState(appData)
     
     useEffect(()=>{
         localStorage.setItem('appDataJson', JSON.stringify(state))
-    }, [state])
+    }, [state]);
     const addPerson = function(user) {
         console.log(user)
         if(user.name && user.email && user.password) {
@@ -78,19 +83,20 @@ export const GlobalProvider = (props) => {
             const userProfile = state.profiles.find(profile=> profile.email === username)
             if(userProfile) {
                 newState.userProfile = userProfile;
-                console.log('newState',newState)
+                console.log('newState', newState)
                 setState(newState);
             } else {
                 console.log('could not find username or password')
             }
         }
     };
-    const selectProfile = async function(id) {
+    const selectProfile = function(id) {
         let newState={...state};
         let data = newState.profiles.find(profile => profile.id === id)
         newState.selectedProfile = data;
         console.log(newState.selectedProfile)
         setState(newState);
+        return newState.selectedProfile;
     }
     const  addVideo = async function(url, index) {
         let newState={...state};
@@ -127,10 +133,3 @@ export const GlobalProvider = (props) => {
         }}>{props.children}</GlobalContext.Provider>
         )
     }
-// addPerson: function(chee) {
-//                 let id = uuidv4();
-//                 let newPerson = new Profile(chee, id);
-//                 this.profiles.push(newPerson);
-//                 this.selectProfile(0);
-//                 this.adminProf(0);
-//             }

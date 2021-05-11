@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Divider } from '@material-ui/core';
-import { Route, Link, Switch, useHistory } from 'react-router-dom';
+import { Route, Link, Switch, useHistory, Redirect } from 'react-router-dom';
 import {useGlobalContext } from './data';
 import {useState, useRef } from 'react';
 const emptyImage = <FontAwesomeIcon size='100px' icon={faUserCircle} />
@@ -16,9 +16,9 @@ export function ProfileList() {
         <div className='profile-list'>
             {profArr.map((item) => {
             if(item == userProfile) {
-                return <Profile user={item} userPro={true}/>
+                return <Profile key={userProfile.id} user={item} userPro={true}/>
             } else {
-                return <Profile user={item} />
+                return <Profile key={userProfile.id} user={item} />
             }
             }
             
@@ -31,19 +31,34 @@ export function ProfileList() {
 export function Profile(props) {
     const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();
     const [state, setState] = useState();
+    const [redirect, setRedirect]= useState();
     const history = useHistory();
     let profile = props.user;
     function clickProfile(e) {
         console.log('you clicked', profile)
-        let newSelection = profile.id;
+        const newSelection = profile.id;
+        console.log('newselection',newSelection)
         selectProfile(newSelection)
+       
     }
+    function renderPic() {
+        if(profile.pic === null) {
+            return <FontAwesomeIcon icon={faUserCircle} />
+        } else {
+            return <img src={profile.pic} />
+        }
+    }
+    
+    // if(redirect) {
+    //     console.log(redirect)
+    //     return <Redirect to={redirect}/>
+    // }
     if(props.userPro) {
         return (
-            <Link to='/admin'>
+            <Link to={`/admin/${profile.id}`}>
             <div className='profile-wrap'>
-            <div className='profile' onClick={clickProfile}>
-                    <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+            <div onClick={clickProfile} className='profile'>
+                    <div onClick={clickProfile} className='profile-pic'>{renderPic()}</div>
                     <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
                 </div>
                 </div>
@@ -52,10 +67,10 @@ export function Profile(props) {
     }
     else{
     return (
-        <Link to='/pubprofile'>
+        <Link to={`/pubprofile/${profile.id}`}>
         <div className='profile-wrap'>
-        <div className='profile' onClick={clickProfile}>
-                <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+        <div onClick={clickProfile} className='profile'>
+                <div onClick={clickProfile} className='profile-pic'>{renderPic()}</div>
                 <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
             </div>
             </div>
@@ -63,16 +78,16 @@ export function Profile(props) {
    
     )
     }
-    return (
-        <Link to='/pubprofile'>
-        <div className='profile-wrap'>
-        <div className='profile' id={props.user.id} onClick={clickProfile}>
-                <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
-                <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
-            </div>
-            </div>
-            </Link>    
-    )
+//     return (
+//         <Link to='/pubprofile'>
+//         <div className='profile-wrap'>
+//         <div className='profile' id={props.user.id} onClick={clickProfile}>
+//                 <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
+//                 <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
+//             </div>
+//             </div>
+//             </Link>    
+//     )
 }
 // export function Profile(props) {
 //     const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();

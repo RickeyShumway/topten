@@ -3,14 +3,17 @@ import {Profile, ProfileList} from './profile'
 import { Button, TextField } from '@material-ui/core';
 import Heading from './rightheading';
 import Spotify from './spotify';
-import { Route, Link, Switch, useHistory } from 'react-router-dom';
+import { Route, Link, Switch, useHistory, useParams } from 'react-router-dom';
 import EditProfile from './editProfile';
 import {useGlobalContext } from './data';
 import {useState, useCallback} from 'react';
 import spotify from './spotify';
 export default function RightBar(props) {
-  const {state:{selectedProfile, userProfile}} = useGlobalContext();
-  console.log('this is selected',selectedProfile)
+  const {selectProfile, state:{userProfile, selectedProfile}} = useGlobalContext();
+  // console.log('this is selected',selectedProfile)
+  // const {id} = useParams();
+  // const selectedProfile = selectProfile(id);
+  // console.log('selectprofile', id, selectedProfile)
   if(props.view == 'home') {
     return (
       <div className="right-bar">
@@ -89,7 +92,7 @@ export default function RightBar(props) {
         </div>
         <div className="right-right">
           User Profile
-        <Profile user={userProfile}/>
+        <Profile user={userProfile} userPro={true}/>
         <EditProfile />
       </div>
     </div>
@@ -107,7 +110,7 @@ function TextInput(props) {
     e.preventDefault();
     userLogin(state.emailLogin, state.passLogin);
     console.log('userlogin', state)
-    history.push("/admin");
+    history.push(`/admin/${userProfile.id}`);
   }
   function handleSubmitNew (e) {
     e.preventDefault();
@@ -117,7 +120,7 @@ function TextInput(props) {
       email:state.emailCreate, 
       password:state.passCreate
     })
-    history.push("/admin");
+    history.push(`/admin/${userProfile.id}`);
     
   }
   function handleInputChange(e) {
