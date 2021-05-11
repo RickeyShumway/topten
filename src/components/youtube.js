@@ -13,9 +13,7 @@ export default async function fetchYoutube(link) {
     //document.getElementById('test').innerHTML = await iframe;
     return await iframe;
 }
-fetchYoutube(urlTest);
-let lionVid = fetchYoutube(urlTest);
-console.log('does thisnee await?',lionVid);
+
 
 
 // function fetchYoutube(link) {

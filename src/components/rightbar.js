@@ -58,7 +58,7 @@ export default function RightBar(props) {
       </div>
       <div className="right-right">
        <Heading heading='User Profile' />
-        <Profile user={userProfile}/>
+        <Profile user={userProfile} userPro={true}/>
         <EditProfile />
         
       </div>
@@ -108,7 +108,6 @@ function TextInput(props) {
     userLogin(state.emailLogin, state.passLogin);
     console.log('userlogin', state)
     history.push("/admin");
-    
   }
   function handleSubmitNew (e) {
     e.preventDefault();
@@ -119,9 +118,7 @@ function TextInput(props) {
       password:state.passCreate
     })
     history.push("/admin");
-    if(userProfile) {
-      
-    }
+    
   }
   function handleInputChange(e) {
     const {target:{value, name}} = e;

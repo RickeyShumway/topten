@@ -34,11 +34,28 @@ export const appData = {
     media: ['Youtube, Spotify, IMBD'],
     icons: [youtubeIcon, spotifyIcon, imdbIcon],
     profiles: [],
-    selectedProfile: new Profile({name:'TestMan', id:324234}),
+    selectedProfile: null,
     userProfile:null,
 }
 export const GlobalProvider = (props) => {
-    const [state, setState] = useState(appData)
+    // localStorage.getItem('appDataJson', JSON.stringify());
+    // const [state, setState] = useState(appData)
+    const [state, setState] = useState(() => {
+        try{
+            let info = localStorage.getItem('appDataJson');
+            return  JSON.parse(info);
+        } catch(error) {
+            console.log('no local storage');
+            return appData
+        }
+
+    })
+    
+    // const [state, setState] = useState(appData)
+    
+    useEffect(()=>{
+        localStorage.setItem('appDataJson', JSON.stringify(state))
+    }, [state])
     const addPerson = function(user) {
         console.log(user)
         if(user.name && user.email && user.password) {
@@ -55,6 +72,8 @@ export const GlobalProvider = (props) => {
     }
     const userLogin = function(username, password) {
         let newState={...state}
+        newState.selectedProfile = null;
+        setState(newState);
         if(username && password) {
             const userProfile = state.profiles.find(profile=> profile.email === username)
             if(userProfile) {
@@ -66,10 +85,11 @@ export const GlobalProvider = (props) => {
             }
         }
     };
-    const selectProfile = function(id) {
+    const selectProfile = async function(id) {
         let newState={...state};
         let data = newState.profiles.find(profile => profile.id === id)
         newState.selectedProfile = data;
+        console.log(newState.selectedProfile)
         setState(newState);
     }
     const  addVideo = async function(url, index) {

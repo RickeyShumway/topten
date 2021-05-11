@@ -1,34 +1,44 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Divider } from '@material-ui/core';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, useHistory } from 'react-router-dom';
 import {useGlobalContext } from './data';
 import {useState, useRef } from 'react';
 const emptyImage = <FontAwesomeIcon size='100px' icon={faUserCircle} />
 
 
 export function ProfileList() {
-    const {state:{profiles}} = useGlobalContext();
+    const {state:{profiles, userProfile}} = useGlobalContext();
     const [state, setState] = useState();
     let profArr = profiles;
     
     return (
         <div className='profile-list'>
-            {profArr.map(item => <Profile user={item} />)}
+            {profArr.map((item) => {
+            if(item == userProfile) {
+                return <Profile user={item} userPro={true}/>
+            } else {
+                return <Profile user={item} />
+            }
+            }
+            
+            )}
         </div>
     )
 }
 
+
 export function Profile(props) {
     const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();
     const [state, setState] = useState();
+    const history = useHistory();
     let profile = props.user;
     function clickProfile(e) {
         console.log('you clicked', profile)
         let newSelection = profile.id;
         selectProfile(newSelection)
     }
-    if(selectedProfile == userProfile) {
+    if(props.userPro) {
         return (
             <Link to='/admin'>
             <div className='profile-wrap'>
@@ -53,20 +63,95 @@ export function Profile(props) {
    
     )
     }
-    // return (
-    //     <Link to='/pubprofile'>
-    //     <div className='profile-wrap'>
-    //     <div className='profile' id={props.user.id} onClick={clickProfile}>
-    //             <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
-    //             <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
-    //         </div>
-    //         </div>
-    //         </Link>    
-    // )
+    return (
+        <Link to='/pubprofile'>
+        <div className='profile-wrap'>
+        <div className='profile' id={props.user.id} onClick={clickProfile}>
+                <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
+                <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
+            </div>
+            </div>
+            </Link>    
+    )
 }
+// export function Profile(props) {
+//     const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();
+//     const [state, setState] = useState();
+//     const history = useHistory();
+//     let profile = props.user;
+//     function clickProfile(e) {
+//         console.log('you clicked', profile)
+//         let newSelection = profile.id;
+//         selectProfile(newSelection)
+//         if(selectedProfile == userProfile) {
+//             history.push("/admin");
+//         } else {
+//             history.push('/pub-profile')
+//         }
+//     }
+//     if(selectedProfile == userProfile) {
+//         return (
+//             <Link to='/admin'>
+//             <div className='profile-wrap'>
+//             <div className='profile' onClick={clickProfile}>
+//                     <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+//                     <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
+//                 </div>
+//                 </div>
+//                 </Link>
+//         )
+//     }
+//     else{
+//     return (
+//         <Link to='/pubprofile'>
+//         <div className='profile-wrap'>
+//         <div className='profile' onClick={clickProfile}>
+//                 <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+//                 <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
+//             </div>
+//             </div>
+//             </Link>
+   
+//     )
+//     }
+//     return (
+//         <Link to='/pubprofile'>
+//         <div className='profile-wrap'>
+//         <div className='profile' id={props.user.id} onClick={clickProfile}>
+//                 <div onClick={clickProfile} className='profile-pic'>{props.user.pic}</div>
+//                 <div onClick={clickProfile} className='profile-name'>{props.user.name}</div>
+//             </div>
+//             </div>
+//             </Link>    
+//     )
+// }
 
 
-
+// export function Profile(props) {
+//     const {selectProfile, state:{selectedProfile, userProfile}} = useGlobalContext();
+//     const [state, setState] = useState();
+//     const history = useHistory();
+//     let profile = props.user;
+//     function clickProfile(e) {
+//         console.log('you clicked', profile)
+//         let newSelection = profile.id;
+//         selectProfile(newSelection)
+//         if(selectedProfile == userProfile) {
+//             history.push("/admin");
+//         } else {
+//             history.push('/pubprofile')
+//         }
+//     }
+//         return (
+           
+//             <div className='profile-wrap'>
+//             <div className='profile' onClick={clickProfile}>
+//                     <div onClick={clickProfile} className='profile-pic'>{profile.pic}</div>
+//                     <div onClick={clickProfile} className='profile-name'>{profile.name}</div>
+//                 </div>
+//                 </div>
+//         )  
+//     }
 // export default function ProfileList(props) {
 //     let profArr = props.profiles;
 //     console.log(profArr[0].name)
