@@ -15,10 +15,10 @@ export function ProfileList() {
     return (
         <div className='profile-list'>
             {profArr.map((item) => {
-            if(item == userProfile) {
-                return <Profile key={userProfile.id} user={item} userPro={true}/>
+            if(item.id === userProfile.id) {
+                return <Profile key={item.id} user={item} userPro={true}/>
             } else {
-                return <Profile key={userProfile.id} user={item} />
+                return <Profile key={item.id} user={item} />
             }
             }
             
@@ -55,7 +55,7 @@ export function Profile(props) {
     // }
     if(props.userPro) {
         return (
-            <Link to={`/admin/${profile.id}`}>
+            <Link to={`/admin/${userProfile.id}`}>
             <div className='profile-wrap'>
             <div onClick={clickProfile} className='profile'>
                     <div onClick={clickProfile} className='profile-pic'>{renderPic()}</div>

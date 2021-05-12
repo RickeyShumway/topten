@@ -104,6 +104,7 @@ export const GlobalProvider =  (props) => {
         let data = await fetchYoutube(url);
         console.log(data)
         newState.userProfile.videos[index] =  await data;
+        newState.selectedProfile = newState.userProfile;
         await setState(newState);
         await console.log('links', state.userProfile.urls, 'fetch',state.userProfile)
     }
@@ -114,10 +115,16 @@ export const GlobalProvider =  (props) => {
         console.log('newstate',newState)
         setState(newState);
     }
+    const removePerson = function(id) {
+        let newState={...state};
+        let newArr = newState.profiles.filter(item => item.id != id);
+        newState.profiles = newArr;
+        setState(newState)
+    }
     useEffect(()=> {
-        addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})
-        addPerson({name:'kyle', email:'ff',password:'jjjjjj'})
-        
+        // addPerson({name:'jon', email:'uuuu@gmail.com',password:'jjjjjj'})
+        // addPerson({name:'kyle', email:'ff',password:'jjjjjj'})
+        // removePerson('26948417-49c2-4c58-949a-ce4f3c46b8d8')
 
     },
     []

@@ -132,7 +132,7 @@ function ListItem(props) {
 function ListItemView(props) {
     const {state:{selectedProfile}} = useGlobalContext();
     const [state, setState] = useState();
-    console.log('plase work',selectedProfile)
+    // console.log('plase work',selectedProfile)
 
     let embed;
     if(props.url) {

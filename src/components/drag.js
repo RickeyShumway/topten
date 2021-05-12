@@ -1,9 +1,11 @@
 import {useGlobalContext } from './data';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {useHistory } from 'react-router-dom';
 import {useState} from 'react';
 import { Button } from '@material-ui/core';
 export default function Drag() {
     const {reorderList, state:{userProfile}} = useGlobalContext();
+    const history = useHistory();
     const [state, setState] = useState({
         userProfile
     });
@@ -33,7 +35,7 @@ export default function Drag() {
                     <div className='dragging-list' {...provided.droppableProps} ref={provided.innerRef}>
                         <DraggingList />
                         {provided.placeholder}
-                        <Button>Submit</Button>
+                        <Button onClick={()=> {history.push(`/admin/${userProfile.id}`)}}>Done</Button>
                     </div>
                 )}
             </Droppable> 
@@ -50,7 +52,7 @@ function DraggingList() {
     let titles = ["EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY","EMPTY"];
     // let titles=['cool','chill', 'nice', 'wow', 'woo', 'chee', 'hoo', 'cmon', 'baby', 'haha']
     let links = userProfile.urls;
-    let vids = userProfile.videos.map(item => item.title);
+    let vids = userProfile.videos.map(item => item?.title);
     console.log('userProfile', userProfile.videos);
     let newTitles=titles.splice(0,vids.length, ...vids)
     

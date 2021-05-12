@@ -15,11 +15,16 @@ a {
     display: flex;
     height: 5vh;
     font-size: 1.4em;
-    background-color: rgb(175, 104, 247);
+    background-color:rgb(115, 61, 242);
+    align-items: center;
+    font-size: 2em;
     
 }
 .top-bar {
     box-sizing: border-box;
+    border-bottom: 2px solid rgb(97, 34, 246);
+    box-shadow: blue;
+    ;
     .logo {
         width: 50%;
         
@@ -28,7 +33,11 @@ a {
         display: flex;
         width: 50%;
         justify-content: flex-end;
+        align-items: center;
     }
+}
+.bottom-bar {
+    border-top: 2px solid rgb(97, 34, 246);
 }
 .main-content {
     
@@ -47,7 +56,7 @@ a {
         
       }
       .right-bar {
-        
+        background-color: rgb(230, 228, 255);
         width: 90%;
         display: flex;
         overflow-y:scroll;
@@ -55,6 +64,7 @@ a {
             background-color: lightblue;
             width: 50%;
             min-height: 90vh;
+            flex-basis: 10;
             // overflow-y: scroll;
             
             display: flex;
@@ -65,8 +75,11 @@ a {
         .right-left {
             background-color: lightblue;
             width: 50%;
+            min-width: 500px;
             min-height: 90vh;
             overflow-y: scroll;
+            flex-basis: 10;
+            
            
             
             .profile-list {
@@ -96,7 +109,8 @@ a {
         .right-right {
             background-color: rgb(205, 205, 205);
             width: 50%;
-            
+            flex-basis: 30;
+          
         }
       }
   }
@@ -128,12 +142,15 @@ a {
 
 }
 .item-title {
-    width: 90%;
+    width: 99%;
     margin: $default-margin;
+    min-width: 5vh;
+    font-size: 1.5em;
 }
 .list-num {
-    width: 10%;
+    width: 1%;
     margin: $default-margin;
+    font-size: 1.5em
 }
 .edit {
     align-self: center;
@@ -191,4 +208,9 @@ a {
 }
 .social-list {
     background-color: rgb(206, 206, 206);
+}
+iframe{
+    margin: $default-margin;
+    padding: 0 10%;
+    
 }

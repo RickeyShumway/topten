@@ -80,7 +80,7 @@ function MainContent() {
 function BottomBar() {
   return (
   <div className="bottom-bar bar">
-    Bottom Bar
+    
   </div>
   )
 }

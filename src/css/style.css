@@ -17,11 +17,15 @@ a {
   display: flex;
   height: 5vh;
   font-size: 1.4em;
-  background-color: #af68f7;
+  background-color: #733df2;
+  align-items: center;
+  font-size: 2em;
 }
 
 .top-bar {
   box-sizing: border-box;
+  border-bottom: 2px solid #6122f6;
+  box-shadow: blue;
 }
 .top-bar .logo {
   width: 50%;
@@ -30,6 +34,11 @@ a {
   display: flex;
   width: 50%;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.bottom-bar {
+  border-top: 2px solid #6122f6;
 }
 
 .main-content {
@@ -45,6 +54,7 @@ a {
   background-color: light-blue;
 }
 .main-content .right-bar {
+  background-color: #e6e4ff;
   width: 90%;
   display: flex;
   overflow-y: scroll;
@@ -53,6 +63,7 @@ a {
   background-color: lightblue;
   width: 50%;
   min-height: 90vh;
+  flex-basis: 10;
   display: flex;
 }
 .main-content .right-bar .right-left-special .dragging-list {
@@ -61,8 +72,10 @@ a {
 .main-content .right-bar .right-left {
   background-color: lightblue;
   width: 50%;
+  min-width: 500px;
   min-height: 90vh;
   overflow-y: scroll;
+  flex-basis: 10;
 }
 .main-content .right-bar .right-left .profile-list {
   box-sizing: border-box;
@@ -86,6 +99,7 @@ a {
 .main-content .right-bar .right-right {
   background-color: #cdcdcd;
   width: 50%;
+  flex-basis: 30;
 }
 
 .login-form {
@@ -122,13 +136,16 @@ a {
 }
 
 .item-title {
-  width: 90%;
+  width: 99%;
   margin: 1vw;
+  min-width: 5vh;
+  font-size: 1.5em;
 }
 
 .list-num {
-  width: 10%;
+  width: 1%;
   margin: 1vw;
+  font-size: 1.5em;
 }
 
 .edit {
@@ -190,6 +207,11 @@ a {
 
 .social-list {
   background-color: #cecece;
+}
+
+iframe {
+  margin: 1vw;
+  padding: 0 10%;
 }
 
 /*# sourceMappingURL=style.css.map */
